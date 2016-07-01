@@ -114,20 +114,25 @@ public class MainActivity extends Activity {
             dialoglistItem.put("share_name",sharename[i]);
             dialoglistItems.add(dialoglistItem);
         }
-      final   SimpleAdapter dialogAdaper = new SimpleAdapter(MainActivity.this,dialoglistItems,R.layout.simple_grid_item,
+      final  SimpleAdapter dialogAdaper = new SimpleAdapter(MainActivity.this,dialoglistItems,R.layout.simple_grid_item,
                 new String[] {"share_img","share_name"}, new int[] {R.id.shareimage_view,R.id.sharetext_view});
         imgbutton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 imgbutton2.setImageResource(secondimgbutton[++img2count % secondimgbutton.length]);
-                DialogPlus dialogPlus = DialogPlus.newDialog(MainActivity.this)
+                final DialogPlus dialogPlus = DialogPlus.newDialog(MainActivity.this)
                         .setAdapter(dialogAdaper)
                         .setCancelable(true)
                         .setContentHolder(new GridHolder(2))
                         .setHeader(R.layout.share_header)
                         .setGravity(Gravity.CENTER)
                         .create();
-
+                dialogPlus.getHeaderView().findViewById(R.id.sharebutton).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogPlus.dismiss();
+                    }
+                });
                 dialogPlus.show();
             }
         });

@@ -8,6 +8,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +18,20 @@ import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.GridHolder;
 import com.shizhefei.view.indicator.IndicatorViewPager;
 import com.shizhefei.view.indicator.ScrollIndicatorView;
 import com.shizhefei.view.indicator.slidebar.ColorBar;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ymw on 2016/6/29.
@@ -70,7 +79,22 @@ public class ManActivity extends FragmentActivity {
     private ToggleButton pinnedToggleButton;
     private ToggleButton splitAutotoggleButton;
     private int unSelectTextColor;
-
+    private String[] mansharename = new String[] {
+            "QQ",
+            "Qzone",
+            "Weibo",
+            "Moments",
+            "QQHeader",
+            "Wechat"
+    };
+    private int[] manshareimg = new int[] {
+            R.drawable.share_bt_qqhaoyou_up,
+            R.drawable.share_bt_qzone_up,
+            R.drawable.share_bt_sinaweibo_up,
+            R.drawable.share_bt_pyq_up,
+            R.drawable.share_bt_qqtouxiang_up,
+            R.drawable.share_bt_weixin_up
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +125,35 @@ public class ManActivity extends FragmentActivity {
         });
         manimageView = (ImageView) findViewById(R.id.manimageView1);
         manimageView.setImageResource(R.drawable.demo_pic);
+        List<Map<String, Object>> mansharelistItems = new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < manshareimg.length; i++) {
+            Map<String, Object>  mansharelistItem = new HashMap<String, Object>();
+            mansharelistItem.put("manshare_img",manshareimg[i]);
+            mansharelistItem.put("manshare_name",mansharename[i]);
+            mansharelistItems.add(mansharelistItem);
+        }
+        final SimpleAdapter dialogAdaper = new SimpleAdapter(ManActivity.this,mansharelistItems,R.layout.man_simple_grid_item,
+                new String[] {"manshare_img","manshare_name"}, new int[] {R.id.manshareimage_view,R.id.mansharetext_view});
+        ImageButton manimageButton3 = (ImageButton)findViewById(R.id.manimageButton3);
+        manimagebuton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final DialogPlus mansharedialogPlus = DialogPlus.newDialog(ManActivity.this)
+                        .setAdapter(dialogAdaper)
+                        .setCancelable(true)
+                        .setContentHolder(new GridHolder(3))
+                        .setHeader(R.layout.manshare_header)
+                        .setGravity(Gravity.CENTER)
+                        .create();
+                mansharedialogPlus.getHeaderView().findViewById(R.id.mansharebutton1).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mansharedialogPlus.dismiss();
+                    }
+                });
+                mansharedialogPlus.show();
+            }
+        });
         //third
         ViewPager viewPager = (ViewPager) findViewById(R.id.moretab_viewPager);
         scrollIndicatorView = (ScrollIndicatorView) findViewById(R.id.moretab_indicator);
