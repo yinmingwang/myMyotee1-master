@@ -5,13 +5,30 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
+
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.GridHolder;
+import com.orhanobut.dialogplus.OnBackPressListener;
+import com.orhanobut.dialogplus.OnCancelListener;
+import com.orhanobut.dialogplus.OnDismissListener;
+import com.orhanobut.dialogplus.OnItemClickListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends Activity {
     private  String savefeed;
@@ -24,6 +41,10 @@ public class MainActivity extends Activity {
     private int img6count = 0;
     private int img7count = 0;
     private int img8count = 0;
+    private RadioGroup radioGroup;
+    private CheckBox headerCheckBox;
+    private CheckBox footerCheckBox;
+    private CheckBox expandedCheckBox;
     private int[] firstimgbutton = new int[] {
             R.drawable.bt_homepage_sound_on,
             R.drawable.bt_homepage_sound_off,
@@ -55,7 +76,18 @@ public class MainActivity extends Activity {
     private int[] eighthimgbutton = new int[] {
             R.drawable.pic_newproduct,
     };
-
+    private String[] sharename = new String[] {
+            "QQ",
+            "Qzone",
+            "Weibo",
+            "Moments"
+    };
+    private int[] shareimg = new int[] {
+            R.drawable.share_bt_qqhaoyou_up,
+            R.drawable.share_bt_qzone_up,
+            R.drawable.share_bt_sinaweibo_up,
+            R.drawable.share_bt_pyq_up
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,11 +107,28 @@ public class MainActivity extends Activity {
         });
         final ImageButton imgbutton2 = (ImageButton) findViewById(R.id.imagebutton2);
         imgbutton2.setImageResource(secondimgbutton[0]);
+        List<Map<String, Object>> dialoglistItems = new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < shareimg.length; i++) {
+            Map<String, Object> dialoglistItem = new HashMap<String, Object>();
+            dialoglistItem.put("share_img",shareimg[i]);
+            dialoglistItem.put("share_name",sharename[i]);
+            dialoglistItems.add(dialoglistItem);
+        }
+      final   SimpleAdapter dialogAdaper = new SimpleAdapter(MainActivity.this,dialoglistItems,R.layout.simple_grid_item,
+                new String[] {"share_img","share_name"}, new int[] {R.id.shareimage_view,R.id.sharetext_view});
         imgbutton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 imgbutton2.setImageResource(secondimgbutton[++img2count % secondimgbutton.length]);
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                DialogPlus dialogPlus = DialogPlus.newDialog(MainActivity.this)
+                        .setAdapter(dialogAdaper)
+                        .setCancelable(true)
+                        .setContentHolder(new GridHolder(2))
+                        .setHeader(R.layout.share_header)
+                        .setGravity(Gravity.CENTER)
+                        .create();
+
+                dialogPlus.show();
             }
         });
         final ImageButton imgbutton3 = (ImageButton) findViewById(R.id.imagebutton3);

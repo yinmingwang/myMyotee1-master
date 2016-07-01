@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="关闭"
+        android:textSize="20sp"
+        android:textColor="@color/skyblue"
+        android:background="@android:color/transparent"
+        android:id="@+id/sharebutton"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerInside"
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sharetextView1"
+        android:scaleType="centerInside"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:text="分享应用到"
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true" />
+
+</LinearLayout>
