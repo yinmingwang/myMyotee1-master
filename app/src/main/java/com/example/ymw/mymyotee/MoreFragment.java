@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
@@ -97,6 +98,17 @@ public class MoreFragment extends LazyFragment {
        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               //ManActivity manActivity = new ManActivity();
+               if (tabIndex == 0) {
+                   ((ManActivity)getActivity()).sethairImageView(position);
+               }
+               if (tabIndex == 1) {
+                   ((ManActivity)getActivity()).setfaceImageView(position);
+               }
+               if (tabIndex == 2) {
+                   ((ManActivity)getActivity()).seteyeImageView(position);
+               }
+
                Toast toast = Toast.makeText(getApplicationContext(),"点击"+position,Toast.LENGTH_SHORT);
                toast.show();
            }
@@ -110,5 +122,8 @@ public class MoreFragment extends LazyFragment {
     }
     public static  String  getIndex() {
         return INTENT_INT_INDEX;
+    }
+    public int getTabIndex() {
+        return tabIndex;
     }
 }

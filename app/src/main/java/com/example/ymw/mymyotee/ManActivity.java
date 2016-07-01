@@ -6,12 +6,15 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -28,7 +31,9 @@ public class ManActivity extends FragmentActivity {
 
     private IndicatorViewPager indicatorViewPager;
     private LayoutInflater inflate;
+    private ImageView manimageView;
     private int size = 3;
+    private int index_pic;
     private  int[] selectors = new int[] {
             R.drawable.hair_selector,
             R.drawable.face_selector,
@@ -94,12 +99,12 @@ public class ManActivity extends FragmentActivity {
                 Toast.makeText(ManActivity.this, "已分享", Toast.LENGTH_SHORT).show();
             }
         });
-        final ImageView manimageview1 = (ImageView) findViewById(R.id.manimageView1);
-        manimageview1.setImageResource(R.drawable.demo_pic);
+        manimageView = (ImageView) findViewById(R.id.manimageView1);
+        manimageView.setImageResource(R.drawable.demo_pic);
+        //third
         ViewPager viewPager = (ViewPager) findViewById(R.id.moretab_viewPager);
         scrollIndicatorView = (ScrollIndicatorView) findViewById(R.id.moretab_indicator);
         scrollIndicatorView.setBackgroundColor(Color.WHITE);
-
         unSelectTextColor = Color.WHITE;
         viewPager.setOffscreenPageLimit(2);
         int color = Color.BLUE;
@@ -108,6 +113,15 @@ public class ManActivity extends FragmentActivity {
         inflate = LayoutInflater.from(this);
         indicatorViewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
     }
+    public void sethairImageView(int pos) {
+            manimageView.setImageDrawable(getResources().getDrawable(hair[pos]));
+        }
+    public void setfaceImageView(int pos) {
+            manimageView.setImageDrawable(getResources().getDrawable(faces[pos]));
+        }
+    public void seteyeImageView(int pos) {
+            manimageView.setImageDrawable(getResources().getDrawable(eyes[pos]));
+        }
 
     private CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
 
