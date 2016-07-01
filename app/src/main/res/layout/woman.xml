@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:id="@+id/linearLayout2">
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:scaleType="centerInside"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/womanimageButton1" />
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="80dp"
+            android:scaleType="centerInside"
+            android:background="@android:color/transparent"
+            android:id="@+id/womanimageButton2" />
+
+        <ImageButton
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerInside"
+            android:background="@android:color/transparent"
+            android:layout_marginLeft="85dp"
+            android:id="@+id/womanimageButton3" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/womanimageView1"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

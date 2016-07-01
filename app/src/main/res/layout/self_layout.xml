@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:scaleType="centerInside"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="3dp"
+            android:background="@android:color/transparent"
+            android:id="@+id/selfimageButton1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/selftextView1"
+            android:text="分享应用到"
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="60dp"
+            android:id="@+id/selfimageButton2" />
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="60dp"
+            android:id="@+id/selfimageButton3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="60dp"
+            android:id="@+id/selfimageButton4" />
+
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="60dp"
+            android:id="@+id/selfimageButton5" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/black">
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:text="返回"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="2dp"
+            android:background="@android:color/darker_gray"
+            android:textColor="@android:color/white"
+            android:id="@+id/feedbackbutton1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户反馈"
+            android:textSize="30sp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/white"
+            android:id="@+id/feedbacktextView1" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="440dp"
+        android:id="@+id/feedscrollView1"
+        android:layout_gravity="center_horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:scrollHorizontally="true"
+        android:layout_height="wrap_content"
+        android:id="@+id/feedtextView2"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerInside"
+        android:singleLine="false"/>
+    </ScrollView>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/black">
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:hint="我想说"
+            android:background="@android:color/white"
+            android:id="@+id/feedbackeditText2" />
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:text="发送"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:textColor="@android:color/white"
+            android:id="@+id/feedbackbutton2" />
+    </LinearLayout>
+</LinearLayout>
