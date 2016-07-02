@@ -1,4 +1,5 @@
 package com.example.ymw.mymyotee;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,6 +43,7 @@ public class ManActivity extends FragmentActivity {
     private LayoutInflater inflate;
     private ImageView manimageView;
     private int size = 3;
+    private boolean manorwoman = true;
     private int index_pic;
     private  int[] selectors = new int[] {
             R.drawable.hair_selector,
@@ -74,6 +76,15 @@ public class ManActivity extends FragmentActivity {
             R.drawable.face_20006,R.drawable.face_20007,R.drawable.face_20008,R.drawable.face_20009,R.drawable.face_20010,R.drawable.face_20011,
             R.drawable.face_20012,R.drawable.face_20013,R.drawable.face_20014,R.drawable.face_20015,R.drawable.face_20016,R.drawable.face_20017,
             R.drawable.face_20018,R.drawable.face_20019
+    };
+    private int[] womanhair = new int[] {
+            R.drawable.hair_0,R.drawable.pic_s1_g_5,R.drawable.pic_s1_g_6,R.drawable.pic_s1_g_7,R.drawable.pic_s1_g_8,R.drawable.pic_s1_g_9,
+            R.drawable.pic_s1_g_10,R.drawable.pic_s1_g_11,R.drawable.pic_s1_g_12,R.drawable.pic_s1_g_13,R.drawable.pic_s1_g_14,R.drawable.pic_s1_g_15,
+            R.drawable.pic_s1_g_16,R.drawable.pic_s1_g_17,R.drawable.pic_s1_g_18,R.drawable.pic_s1_g_20,R.drawable.pic_s1_g_21,
+            R.drawable.pic_s1_g_22,R.drawable.pic_s1_g_23,R.drawable.pic_s1_g_24,R.drawable.pic_s1_g_25,R.drawable.pic_s1_g_26,
+            R.drawable.pic_s1_g_27,R.drawable.pic_s1_g_28,R.drawable.pic_s1_g_29,R.drawable.pic_s1_g_30001,R.drawable.pic_s1_g_30002,
+            R.drawable.pic_s1_g_30003,R.drawable.pic_s1_g_30004,R.drawable.pic_s1_g_30005,R.drawable.pic_s1_g_30006,R.drawable.pic_s1_g_30007,
+            R.drawable.pic_s1_g_30008,R.drawable.pic_s1_g_30009,R.drawable.pic_s1_g_30010
     };
     private ScrollIndicatorView scrollIndicatorView;
     private ToggleButton pinnedToggleButton;
@@ -154,6 +165,9 @@ public class ManActivity extends FragmentActivity {
                 mansharedialogPlus.show();
             }
         });
+        //manorwoman
+        Intent intent = getIntent();
+        manorwoman = (boolean)intent.getBooleanExtra("isman",true);
         //third
         ViewPager viewPager = (ViewPager) findViewById(R.id.moretab_viewPager);
         scrollIndicatorView = (ScrollIndicatorView) findViewById(R.id.moretab_indicator);
@@ -167,15 +181,20 @@ public class ManActivity extends FragmentActivity {
         indicatorViewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
     }
     public void sethairImageView(int pos) {
-            manimageView.setImageDrawable(getResources().getDrawable(hair[pos]));
+        manimageView.setImageDrawable(getResources().getDrawable(hair[pos]));
         }
     public void setfaceImageView(int pos) {
-            manimageView.setImageDrawable(getResources().getDrawable(faces[pos]));
+        manimageView.setImageDrawable(getResources().getDrawable(faces[pos]));
         }
     public void seteyeImageView(int pos) {
-            manimageView.setImageDrawable(getResources().getDrawable(eyes[pos]));
+        manimageView.setImageDrawable(getResources().getDrawable(eyes[pos]));
         }
-
+    public void setWomanhairImageView(int pos) {
+        manimageView.setImageDrawable(getResources().getDrawable(womanhair[pos]));
+    }
+    public boolean gettype() {
+        return manorwoman;
+    }
     private CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
 
         @Override

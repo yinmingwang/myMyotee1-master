@@ -20,6 +20,7 @@ import java.util.Map;
 public class MoreFragment extends LazyFragment {
     private GridView gridView;
     private int tabIndex;
+    private boolean mantype = true;
     private Handler handler;
     private static final String INTENT_INT_INDEX = "intent_int_index";
     private int[] eyes = new int[] {
@@ -48,6 +49,15 @@ public class MoreFragment extends LazyFragment {
             R.drawable.face_20006,R.drawable.face_20007,R.drawable.face_20008,R.drawable.face_20009,R.drawable.face_20010,R.drawable.face_20011,
             R.drawable.face_20012,R.drawable.face_20013,R.drawable.face_20014,R.drawable.face_20015,R.drawable.face_20016,R.drawable.face_20017,
             R.drawable.face_20018,R.drawable.face_20019
+    };
+    private int[] womanhair = new int[] {
+            R.drawable.hair_0,R.drawable.pic_s1_g_5,R.drawable.pic_s1_g_6,R.drawable.pic_s1_g_7,R.drawable.pic_s1_g_8,R.drawable.pic_s1_g_9,
+            R.drawable.pic_s1_g_10,R.drawable.pic_s1_g_11,R.drawable.pic_s1_g_12,R.drawable.pic_s1_g_13,R.drawable.pic_s1_g_14,R.drawable.pic_s1_g_15,
+            R.drawable.pic_s1_g_16,R.drawable.pic_s1_g_17,R.drawable.pic_s1_g_18,R.drawable.pic_s1_g_20,R.drawable.pic_s1_g_21,
+            R.drawable.pic_s1_g_22,R.drawable.pic_s1_g_23,R.drawable.pic_s1_g_24,R.drawable.pic_s1_g_25,R.drawable.pic_s1_g_26,
+            R.drawable.pic_s1_g_27,R.drawable.pic_s1_g_28,R.drawable.pic_s1_g_29,R.drawable.pic_s1_g_30001,R.drawable.pic_s1_g_30002,
+            R.drawable.pic_s1_g_30003,R.drawable.pic_s1_g_30004,R.drawable.pic_s1_g_30005,R.drawable.pic_s1_g_30006,R.drawable.pic_s1_g_30007,
+            R.drawable.pic_s1_g_30008,R.drawable.pic_s1_g_30009,R.drawable.pic_s1_g_30010
     };
     @Override
     protected void onCreateViewLazy(Bundle savedInstanceState) {
@@ -80,39 +90,115 @@ public class MoreFragment extends LazyFragment {
             eyelistItem.put("eye",eyes[i]);
             eyelistItems.add(eyelistItem);
         }
-        if (tabIndex == 0) {
-            SimpleAdapter hairAdapter = new SimpleAdapter(MoreFragment.this.getContext(),hairlistItems,R.layout.cell_select,
-                    new String[]{"hair"}, new int[] {R.id.cell_selectimageview1});
-            gridView.setAdapter(hairAdapter);
+        List<Map<String, Object>> womanhairlistItems = new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < womanhair.length; i++) {
+            Map<String, Object> womanhairlistItem = new HashMap<String, Object>();
+            womanhairlistItem.put("womanhair",womanhair[i]);
+            womanhairlistItems.add(womanhairlistItem);
         }
-        if (tabIndex == 1) {
-            SimpleAdapter faceAdapter = new SimpleAdapter(MoreFragment.this.getContext(),facelistItems,R.layout.cell_select,
-                    new String[] {"face"}, new int[] {R.id.cell_selectimageview1});
-            gridView.setAdapter(faceAdapter);
+        //judge the type
+        mantype = ((ManActivity)getActivity()).gettype();
+        if (mantype == true) {
+            if (tabIndex == 0) {
+                SimpleAdapter hairAdapter = new SimpleAdapter(MoreFragment.this.getContext(),hairlistItems,R.layout.cell_select,
+                        new String[]{"hair"}, new int[] {R.id.cell_selectimageview1});
+                gridView.setAdapter(hairAdapter);
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ((ManActivity)getActivity()).sethairImageView(position);
+                    }
+                });
+            }
+            if (tabIndex == 1) {
+                SimpleAdapter faceAdapter = new SimpleAdapter(MoreFragment.this.getContext(),facelistItems,R.layout.cell_select,
+                        new String[] {"face"}, new int[] {R.id.cell_selectimageview1});
+                gridView.setAdapter(faceAdapter);
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ((ManActivity)getActivity()).setfaceImageView(position);
+                    }
+                });
+            }
+            if (tabIndex == 2) {
+                SimpleAdapter eyeAdapter = new SimpleAdapter(MoreFragment.this.getContext(),eyelistItems,R.layout.cell_select,
+                        new String[] {"eye"}, new int[] {R.id.cell_selectimageview1});
+                gridView.setAdapter(eyeAdapter);
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ((ManActivity)getActivity()).seteyeImageView(position);
+                    }
+                });
+            }
         }
-        if (tabIndex == 2) {
-            SimpleAdapter eyeAdapter = new SimpleAdapter(MoreFragment.this.getContext(),eyelistItems,R.layout.cell_select,
-                    new String[] {"eye"}, new int[] {R.id.cell_selectimageview1});
-            gridView.setAdapter(eyeAdapter);
+        if (mantype == false) {
+            if (tabIndex == 0) {
+                SimpleAdapter womanhairAdapter = new SimpleAdapter(MoreFragment.this.getContext(),womanhairlistItems,R.layout.cell_select,
+                        new String[]{"womanhair"}, new int[] {R.id.cell_selectimageview1});
+                gridView.setAdapter(womanhairAdapter);
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ((ManActivity)getActivity()).setWomanhairImageView(position);
+                    }
+                });
+            }
+            if (tabIndex == 1) {
+                SimpleAdapter faceAdapter = new SimpleAdapter(MoreFragment.this.getContext(),facelistItems,R.layout.cell_select,
+                        new String[] {"face"}, new int[] {R.id.cell_selectimageview1});
+                gridView.setAdapter(faceAdapter);
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ((ManActivity)getActivity()).setfaceImageView(position);
+                    }
+                });
+            }
+            if (tabIndex == 2) {
+                SimpleAdapter eyeAdapter = new SimpleAdapter(MoreFragment.this.getContext(),eyelistItems,R.layout.cell_select,
+                        new String[] {"eye"}, new int[] {R.id.cell_selectimageview1});
+                gridView.setAdapter(eyeAdapter);
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ((ManActivity)getActivity()).seteyeImageView(position);
+                    }
+                });
+            }
         }
-       gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
-           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               //ManActivity manActivity = new ManActivity();
-               if (tabIndex == 0) {
-                   ((ManActivity)getActivity()).sethairImageView(position);
-               }
-               if (tabIndex == 1) {
-                   ((ManActivity)getActivity()).setfaceImageView(position);
-               }
-               if (tabIndex == 2) {
-                   ((ManActivity)getActivity()).seteyeImageView(position);
-               }
 
-               Toast toast = Toast.makeText(getApplicationContext(),"点击"+position,Toast.LENGTH_SHORT);
-               toast.show();
-           }
-       });
+//       gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//           @Override
+//           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//               //ManActivity manActivity = new ManActivity();
+//               if (mantype = true) {
+//                   if (tabIndex == 0) {
+//                       ((ManActivity)getActivity()).sethairImageView(position);
+//                   }
+//                   if (tabIndex == 1) {
+//                       ((ManActivity)getActivity()).setfaceImageView(position);
+//                   }
+//                   if (tabIndex == 2) {
+//                       ((ManActivity)getActivity()).seteyeImageView(position);
+//                   }
+//               }
+//               if (mantype == false) {
+//                   if (tabIndex == 0) {
+//                       ((ManActivity)getActivity()).setWomanhairImageView(position);
+//                   }
+//                   if (tabIndex == 1) {
+//                       ((ManActivity)getActivity()).setfaceImageView(position);
+//                   }
+//                   if (tabIndex == 2) {
+//                       ((ManActivity)getActivity()).seteyeImageView(position);
+//                   }
+//               }
+//               Toast toast = Toast.makeText(getApplicationContext(),"点击"+position,Toast.LENGTH_SHORT);
+//               toast.show();
+//           }
+//       });
         handler.sendEmptyMessageDelayed(1, 2000);
     }
     @Override

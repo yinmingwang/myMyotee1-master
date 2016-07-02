@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends Activity {
-    private  String savefeed;
+    private  boolean isman = true;
     private boolean isVoice = true;
     private int img1count = 0;
     private int img2count = 0;
@@ -158,7 +158,11 @@ public class MainActivity extends Activity {
                     MediaPlayer mPlayer = MediaPlayer.create(MainActivity.this, R.raw.boy);
                     mPlayer.start();
                 }
+                isman = true;
+                Bundle bundle=new Bundle();
+                bundle.putBoolean("isman",isman);
                 Intent intent = new Intent(MainActivity.this,ManActivity.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -172,7 +176,11 @@ public class MainActivity extends Activity {
                     MediaPlayer mPlayer = MediaPlayer.create(MainActivity.this,R.raw.girl);
                     mPlayer.start();
                 }
-                Intent intent = new Intent(MainActivity.this,WomanActivity.class);
+                isman = false;
+                Bundle bundle=new Bundle();
+                bundle.putBoolean("isman",isman);
+                Intent intent = new Intent(MainActivity.this,ManActivity.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
