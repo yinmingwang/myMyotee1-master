@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -24,6 +26,7 @@ import com.orhanobut.dialogplus.OnBackPressListener;
 import com.orhanobut.dialogplus.OnCancelListener;
 import com.orhanobut.dialogplus.OnDismissListener;
 import com.orhanobut.dialogplus.OnItemClickListener;
+import com.orhanobut.dialogplus.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -204,6 +207,34 @@ public class MainActivity extends Activity {
         });
         final ImageButton imgbutton8 = (ImageButton) findViewById(R.id.imagebutton8);
         imgbutton8.setImageResource(eighthimgbutton[0]);
+        imgbutton8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final DialogPlus dialogPlus = DialogPlus.newDialog(MainActivity.this)
+                        .setCancelable(true)
+                        .setContentHolder(new ViewHolder(R.layout.newcontent))
+                        .setFooter(R.layout.newfooter)
+                        .setGravity(Gravity.CENTER)
+                        .create();
+                dialogPlus.getFooterView().findViewById(R.id.newbutton1).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialogPlus.getFooterView().findViewById(R.id.newbutton1).setBackgroundColor(getResources().getColor(R.color.skyblue));
+                        dialogPlus.dismiss();
+                    }
+                });
+                dialogPlus.getFooterView().findViewById(R.id.newbutton2).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Uri uri = Uri.parse("http://www.bqtalk.com/indexP.html");
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+                        dialogPlus.dismiss();
+                    }
+                });
+                dialogPlus.show();
+            }
+        });
         final ImageButton imgbutton9 = (ImageButton) findViewById(R.id.imagebutton9);
         imgbutton9.setImageResource(R.drawable.pic_startpage_joinus);
         imgbutton9.setOnClickListener(new View.OnClickListener() {

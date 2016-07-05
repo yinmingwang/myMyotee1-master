@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="80dp"
+        android:text="脸萌新品,\nEricFace呱呱上线"
+        android:textSize="20sp"
+        android:scaleType="centerInside"
+        android:gravity="center|center_horizontal"
+        android:id="@+id/newtextview1"/>
+</LinearLayout>

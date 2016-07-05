@@ -24,7 +24,7 @@ public class MoreFragment extends LazyFragment {
     private Handler handler;
     private static final String INTENT_INT_INDEX = "intent_int_index";
     private int[] eyes = new int[] {
-            R.drawable.eye_0,R.drawable.eye_1,R.drawable.eye_2,R.drawable.eye_3,R.drawable.eye_4, R.drawable.eye_5,R.drawable.eye_6,R.drawable.eye_7,R.drawable.eye_8,
+            R.drawable.eye_4, R.drawable.eye_5,R.drawable.eye_6,R.drawable.eye_7,R.drawable.eye_8,
             R.drawable.eye_9,R.drawable.eye_10,R.drawable.eye_11, R.drawable.eye_12,R.drawable.eye_13, R.drawable.eye_14,R.drawable.eye_15,R.drawable.eye_16,
             R.drawable.eye_17,R.drawable.eye_18,R.drawable.eye_19,R.drawable.eye_20, R.drawable.eye_21,R.drawable.eye_22,R.drawable.eye_23,R.drawable.eye_24,
             R.drawable.eye_25, R.drawable.eye_26,R.drawable.eye_27,R.drawable.eye_28,R.drawable.eye_29, R.drawable.eye_30,R.drawable.eye_31,R.drawable.eye_32,
@@ -106,7 +106,9 @@ public class MoreFragment extends LazyFragment {
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        ((ManActivity)getActivity()).sethairImageView(position);
+                        ((ManActivity)getActivity()).changeImage("hair",position);
+                        Toast toast = Toast.makeText(getApplicationContext(),"点击"+position,Toast.LENGTH_SHORT);
+                        toast.show();
                     }
                 });
             }
@@ -117,7 +119,9 @@ public class MoreFragment extends LazyFragment {
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        ((ManActivity)getActivity()).setfaceImageView(position);
+                        ((ManActivity)getActivity()).changeImage("face",position);
+                        Toast toast = Toast.makeText(getApplicationContext(),"点击"+position,Toast.LENGTH_SHORT);
+                        toast.show();
                     }
                 });
             }
@@ -128,20 +132,22 @@ public class MoreFragment extends LazyFragment {
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        ((ManActivity)getActivity()).seteyeImageView(position);
+                        ((ManActivity)getActivity()).changeImage("eye",position);
+                        Toast toast = Toast.makeText(getApplicationContext(),"点击"+position,Toast.LENGTH_SHORT);
+                        toast.show();
                     }
                 });
             }
         }
         if (mantype == false) {
             if (tabIndex == 0) {
-                SimpleAdapter womanhairAdapter = new SimpleAdapter(MoreFragment.this.getContext(),womanhairlistItems,R.layout.cell_select,
-                        new String[]{"womanhair"}, new int[] {R.id.cell_selectimageview1});
-                gridView.setAdapter(womanhairAdapter);
+                SimpleAdapter hairAdapter = new SimpleAdapter(MoreFragment.this.getContext(),hairlistItems,R.layout.cell_select,
+                        new String[]{"hair"}, new int[] {R.id.cell_selectimageview1});
+                gridView.setAdapter(hairAdapter);
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        ((ManActivity)getActivity()).setWomanhairImageView(position);
+                        ((ManActivity)getActivity()).changeImage("hair",position);
                     }
                 });
             }
@@ -152,7 +158,7 @@ public class MoreFragment extends LazyFragment {
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        ((ManActivity)getActivity()).setfaceImageView(position);
+                        ((ManActivity)getActivity()).changeImage("face",position);
                     }
                 });
             }
@@ -163,7 +169,7 @@ public class MoreFragment extends LazyFragment {
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        ((ManActivity)getActivity()).seteyeImageView(position);
+                        ((ManActivity)getActivity()).changeImage("eye",position);
                     }
                 });
             }

@@ -5,7 +5,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:id="@+id/linearLayout2">
 
@@ -14,14 +14,14 @@
             android:layout_height="40dp"
             android:scaleType="centerInside"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:background="@android:color/transparent"
             android:id="@+id/manimageButton1" />
 
         <ImageButton
             android:layout_width="70dp"
             android:layout_height="40dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="80dp"
             android:scaleType="centerInside"
             android:background="@android:color/transparent"
@@ -30,30 +30,22 @@
         <ImageButton
             android:layout_width="70dp"
             android:layout_height="40dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:scaleType="centerInside"
             android:background="@android:color/transparent"
             android:layout_marginLeft="85dp"
             android:id="@+id/manimageButton3" />
     </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout3"
-        android:layout_below="@+id/linearLayout2">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:scaleType="centerInside"
-            android:id="@+id/manimageView1" />
-    </LinearLayout>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/linearLayout3"
+        android:layout_below="@+id/linearLayout2"
         android:orientation="vertical" >
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/webView"
+            android:layout_gravity="center_horizontal" />
         <com.shizhefei.view.indicator.ScrollIndicatorView
             android:id="@+id/moretab_indicator"
             android:layout_width="match_parent"

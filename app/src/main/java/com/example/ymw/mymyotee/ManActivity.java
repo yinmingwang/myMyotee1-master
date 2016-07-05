@@ -2,6 +2,7 @@ package com.example.ymw.mymyotee;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +14,9 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -41,7 +45,6 @@ public class ManActivity extends FragmentActivity {
 
     private IndicatorViewPager indicatorViewPager;
     private LayoutInflater inflate;
-    private ImageView manimageView;
     private int size = 3;
     private boolean manorwoman = true;
     private int index_pic;
@@ -51,7 +54,7 @@ public class ManActivity extends FragmentActivity {
             R.drawable.eye_selector,
     };
     private int[] eyes = new int[] {
-            R.drawable.eye_0,R.drawable.eye_1,R.drawable.eye_2,R.drawable.eye_3,R.drawable.eye_4, R.drawable.eye_5,R.drawable.eye_6,R.drawable.eye_7,R.drawable.eye_8,
+            R.drawable.eye_4, R.drawable.eye_5,R.drawable.eye_6,R.drawable.eye_7,R.drawable.eye_8,
             R.drawable.eye_9,R.drawable.eye_10,R.drawable.eye_11, R.drawable.eye_12,R.drawable.eye_13, R.drawable.eye_14,R.drawable.eye_15,R.drawable.eye_16,
             R.drawable.eye_17,R.drawable.eye_18,R.drawable.eye_19,R.drawable.eye_20, R.drawable.eye_21,R.drawable.eye_22,R.drawable.eye_23,R.drawable.eye_24,
             R.drawable.eye_25, R.drawable.eye_26,R.drawable.eye_27,R.drawable.eye_28,R.drawable.eye_29, R.drawable.eye_30,R.drawable.eye_31,R.drawable.eye_32,
@@ -90,6 +93,8 @@ public class ManActivity extends FragmentActivity {
     private ToggleButton pinnedToggleButton;
     private ToggleButton splitAutotoggleButton;
     private int unSelectTextColor;
+    private Handler mHandler = new Handler();
+    private WebView webView;
     private String[] mansharename = new String[] {
             "QQ",
             "Qzone",
@@ -134,8 +139,6 @@ public class ManActivity extends FragmentActivity {
                 Toast.makeText(ManActivity.this, "已分享", Toast.LENGTH_SHORT).show();
             }
         });
-        manimageView = (ImageView) findViewById(R.id.manimageView1);
-        manimageView.setImageResource(R.drawable.demo_pic);
         List<Map<String, Object>> mansharelistItems = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < manshareimg.length; i++) {
             Map<String, Object>  mansharelistItem = new HashMap<String, Object>();
@@ -165,6 +168,18 @@ public class ManActivity extends FragmentActivity {
                 mansharedialogPlus.show();
             }
         });
+        //webview
+        webView = (WebView)findViewById(R.id.webView);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view,url);
+                webView.loadUrl("javascript: initHeadEdit()");
+            }
+        });
+        webView.loadUrl("file:///android_asset/headEdit.html");
         //manorwoman
         Intent intent = getIntent();
         manorwoman = (boolean)intent.getBooleanExtra("isman",true);
@@ -180,17 +195,11 @@ public class ManActivity extends FragmentActivity {
         inflate = LayoutInflater.from(this);
         indicatorViewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
     }
-    public void sethairImageView(int pos) {
-        manimageView.setImageDrawable(getResources().getDrawable(hair[pos]));
-        }
-    public void setfaceImageView(int pos) {
-        manimageView.setImageDrawable(getResources().getDrawable(faces[pos]));
-        }
-    public void seteyeImageView(int pos) {
-        manimageView.setImageDrawable(getResources().getDrawable(eyes[pos]));
-        }
-    public void setWomanhairImageView(int pos) {
-        manimageView.setImageDrawable(getResources().getDrawable(womanhair[pos]));
+    //
+    public void changeImage(String type, int pos) {
+        //System.out.println(type);
+        //System.out.println(pos);
+        webView.loadUrl("javascript:personInitA('" + type + "," + pos + "')");
     }
     public boolean gettype() {
         return manorwoman;
