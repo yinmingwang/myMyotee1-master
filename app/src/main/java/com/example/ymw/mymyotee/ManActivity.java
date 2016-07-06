@@ -1,7 +1,10 @@
 package com.example.ymw.mymyotee;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -33,6 +36,10 @@ import com.shizhefei.view.indicator.IndicatorViewPager;
 import com.shizhefei.view.indicator.ScrollIndicatorView;
 import com.shizhefei.view.indicator.slidebar.ColorBar;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +53,7 @@ public class ManActivity extends FragmentActivity {
     private IndicatorViewPager indicatorViewPager;
     private LayoutInflater inflate;
     private int size = 3;
+    private int countsaveimage = 0;
     private boolean manorwoman = true;
     private int index_pic;
     private  int[] selectors = new int[] {
@@ -128,7 +136,9 @@ public class ManActivity extends FragmentActivity {
         manimagebutton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ManActivity.this, "已保存", Toast.LENGTH_SHORT).show();
+                String savename = countsaveimage+".png";
+                countsaveimage++;
+                saveImage(savename);
             }
         });
         final ImageButton manimagebuton3 = (ImageButton) findViewById(R.id.manimageButton3);
@@ -194,6 +204,38 @@ public class ManActivity extends FragmentActivity {
         indicatorViewPager = new IndicatorViewPager(scrollIndicatorView, viewPager);
         inflate = LayoutInflater.from(this);
         indicatorViewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
+    }
+    //
+    //saveWebview
+    public Bitmap convertViewToBitmap(WebView view) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
+        //利用bitmap生成画布
+        Canvas canvas = new Canvas(bitmap);
+        //把view中的内容绘制在画布上
+        view.draw(canvas);
+        return bitmap;
+    }
+//    public static String getPath()  {
+//        boolean hasSDCard = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+//            return Environment.getExternalStorageDirectory().toString() + "/saving_picture";
+//    }
+    public void saveImage(String filename) {
+        Log.e("save", "保存图片");
+        Bitmap bitmap = convertViewToBitmap(webView);
+        File extDir = Environment.getExternalStorageDirectory();
+        File fullfillname = new File(extDir,filename);
+        try{
+            fullfillname.createNewFile();
+            FileOutputStream fos = new FileOutputStream(fullfillname);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, fos);
+            Log.e("save", "保存成功");
+            Toast.makeText(ManActivity.this, "已存储到手机:"+Environment.getExternalStorageDirectory().toString(), Toast.LENGTH_SHORT).show();
+            fos.flush();
+            fos.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     //
     public void changeImage(String type, int pos) {
