@@ -1,5 +1,7 @@
 package com.example.ymw.mymyotee;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -59,6 +61,29 @@ public class MoreFragment extends LazyFragment {
             R.drawable.pic_s1_g_30003,R.drawable.pic_s1_g_30004,R.drawable.pic_s1_g_30005,R.drawable.pic_s1_g_30006,R.drawable.pic_s1_g_30007,
             R.drawable.pic_s1_g_30008,R.drawable.pic_s1_g_30009,R.drawable.pic_s1_g_30010
     };
+    private int[] nose = new int[] {
+            R.drawable.pic_s14_20000, R.drawable.pic_s14_20001, R.drawable.pic_s14_20002, R.drawable.pic_s14_20003, R.drawable.pic_s14_20004,
+            R.drawable.pic_s14_20004, R.drawable.pic_s14_20006, R.drawable.pic_s14_20007, R.drawable.pic_s14_20008, R.drawable.pic_s14_20009,
+            R.drawable.pic_s14_20010, R.drawable.pic_s14_20011, R.drawable.pic_s14_20012, R.drawable.pic_s14_20013, R.drawable.pic_s14_20014,
+            R.drawable.pic_s14_20015, R.drawable.pic_s14_20016, R.drawable.pic_s14_20017, R.drawable.pic_s14_20018, R.drawable.pic_s14_20019,
+            R.drawable.pic_s14_20020, R.drawable.pic_s14_20021, R.drawable.pic_s14_20022, R.drawable.pic_s14_20023, R.drawable.pic_s14_20024,
+            R.drawable.pic_s14_20025, R.drawable.pic_s14_20026, R.drawable.pic_s14_20027, R.drawable.pic_s14_20028, R.drawable.pic_s14_20029,
+            R.drawable.pic_s14_20030, R.drawable.pic_s14_20031, R.drawable.pic_s14_20032, R.drawable.pic_s14_20033, R.drawable.pic_s14_20034,
+            R.drawable.pic_s14_20035, R.drawable.pic_s14_20036, R.drawable.pic_s14_20037, R.drawable.pic_s14_20038
+    };
+    private int[] mouth = new int[] {
+            R.drawable.pic_s5_1,R.drawable.pic_s5_2,R.drawable.pic_s5_3,R.drawable.pic_s5_4,R.drawable.pic_s5_5,R.drawable.pic_s5_6,
+            R.drawable.pic_s5_7,R.drawable.pic_s5_8,R.drawable.pic_s5_9,R.drawable.pic_s5_10,R.drawable.pic_s5_11,R.drawable.pic_s5_12,
+            R.drawable.pic_s5_13,R.drawable.pic_s5_14,R.drawable.pic_s5_15,R.drawable.pic_s5_16,R.drawable.pic_s5_17,R.drawable.pic_s5_18,
+            R.drawable.pic_s5_19,R.drawable.pic_s5_20,R.drawable.pic_s5_21,R.drawable.pic_s5_22,R.drawable.pic_s5_23,R.drawable.pic_s5_24,
+            R.drawable.pic_s5_25,R.drawable.pic_s5_26,R.drawable.pic_s5_27,R.drawable.pic_s5_28,R.drawable.pic_s5_29,R.drawable.pic_s5_30,
+            R.drawable.pic_s5_31,R.drawable.pic_s5_32,R.drawable.pic_s5_33,R.drawable.pic_s5_34,R.drawable.pic_s5_35,R.drawable.pic_s5_36,
+            R.drawable.pic_s5_37,R.drawable.pic_s5_38,R.drawable.pic_s5_39,R.drawable.pic_s5_40,R.drawable.pic_s5_41,R.drawable.pic_s5_42,
+            R.drawable.pic_s5_43,R.drawable.pic_s5_44,R.drawable.pic_s5_45,R.drawable.pic_s5_46,R.drawable.pic_s5_47,R.drawable.pic_s5_48,
+            R.drawable.pic_s5_49,R.drawable.pic_s5_50,R.drawable.pic_s5_51,R.drawable.pic_s5_52,R.drawable.pic_s5_53,R.drawable.pic_s5_54,
+            R.drawable.pic_s5_55,R.drawable.pic_s5_56,R.drawable.pic_s5_57,R.drawable.pic_s5_58,R.drawable.pic_s5_59,R.drawable.pic_s5_60,
+            R.drawable.pic_s5_61
+    };
     @Override
     protected void onCreateViewLazy(Bundle savedInstanceState) {
         super.onCreateViewLazy(savedInstanceState);
@@ -96,6 +121,18 @@ public class MoreFragment extends LazyFragment {
             womanhairlistItem.put("womanhair",womanhair[i]);
             womanhairlistItems.add(womanhairlistItem);
         }
+        List<Map<String, Object>> noselistItems = new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < nose.length; i++) {
+            Map<String, Object> mannoselistItem = new HashMap<String, Object>();
+            mannoselistItem.put("nose",nose[i]);
+            noselistItems.add(mannoselistItem);
+        }
+        List<Map<String, Object>> mouthlistItems = new ArrayList<Map<String, Object>>();
+        for (int i = 0; i < mouth.length; i++) {
+            Map<String, Object> mouthlistItem = new HashMap<String, Object>();
+            mouthlistItem.put("mouth",mouth[i]);
+            mouthlistItems.add(mouthlistItem);
+        }
         //judge the type
         mantype = ((ManActivity)getActivity()).gettype();
         if (mantype == true) {
@@ -107,8 +144,12 @@ public class MoreFragment extends LazyFragment {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         ((ManActivity)getActivity()).changeImage("hair",position);
-                        Toast toast = Toast.makeText(getApplicationContext(),"点击"+position,Toast.LENGTH_SHORT);
-                        toast.show();
+                        //ImageView changeimageview = (ImageView)findViewById(R.id.cell_selectimageview1);
+                        //changeimageview.setBackground(getResources().getDrawable(R.drawable.chang_shape));
+                        //changeimageview.setBackground(getResources().getDrawable(R.drawable.chang_shape));
+                       // gridView.setSelector(new ColorDrawable(Color.BLACK));
+                        //Toast toast = Toast.makeText(getApplicationContext(),"点击"+position,Toast.LENGTH_SHORT);
+                        //toast.show();
                     }
                 });
             }
@@ -120,8 +161,13 @@ public class MoreFragment extends LazyFragment {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         ((ManActivity)getActivity()).changeImage("face",position);
-                        Toast toast = Toast.makeText(getApplicationContext(),"点击"+position,Toast.LENGTH_SHORT);
-                        toast.show();
+                        //ImageView changeimageview = (ImageView)findViewById(R.id.cell_selectimageview1);
+                        //changeimageview.setBackground(getResources().getDrawable(R.drawable.chang_shape));
+                       // gridView.setSelector(new ColorDrawable(Color.BLACK));
+                        //ImageView changeimageview = (ImageView)findViewById(R.id.cell_selectimageview1);
+                        //changeimageview.setBackground(getResources().getDrawable(R.drawable.chang_shape));
+                        //Toast toast = Toast.makeText(getApplicationContext(),"点击"+position,Toast.LENGTH_SHORT);
+                        //toast.show();
                     }
                 });
             }
@@ -133,12 +179,54 @@ public class MoreFragment extends LazyFragment {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         ((ManActivity)getActivity()).changeImage("eye",position);
-                        Toast toast = Toast.makeText(getApplicationContext(),"点击"+position,Toast.LENGTH_SHORT);
-                        toast.show();
+                       // ImageView changeimageview = (ImageView)findViewById(R.id.cell_selectimageview1);
+                       // changeimageview.setBackground(getResources().getDrawable(R.drawable.chang_shape));
+                        //gridView.setSelector(new ColorDrawable(Color.BLACK));
+                        //ImageView changeimageview = (ImageView)findViewById(R.id.cell_selectimageview1);
+                       // changeimageview.setBackground(getResources().getDrawable(R.drawable.chang_shape));
+                        //Toast toast = Toast.makeText(getApplicationContext(),"点击"+position,Toast.LENGTH_SHORT);
+                        //toast.show();
+                    }
+                });
+            }
+            if (tabIndex == 3) {
+                SimpleAdapter noseAdapter = new SimpleAdapter(MoreFragment.this.getContext(),noselistItems,R.layout.cell_select,
+                        new String[] {"nose"}, new int[] {R.id.cell_selectimageview1});
+                gridView.setAdapter(noseAdapter);
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ((ManActivity)getActivity()).changeImage("nose",position);
+                        // ImageView changeimageview = (ImageView)findViewById(R.id.cell_selectimageview1);
+                        // changeimageview.setBackground(getResources().getDrawable(R.drawable.chang_shape));
+                        //gridView.setSelector(new ColorDrawable(Color.BLACK));
+                        //ImageView changeimageview = (ImageView)findViewById(R.id.cell_selectimageview1);
+                        // changeimageview.setBackground(getResources().getDrawable(R.drawable.chang_shape));
+                        //Toast toast = Toast.makeText(getApplicationContext(),"点击"+position,Toast.LENGTH_SHORT);
+                        //toast.show();
+                    }
+                });
+            }
+            if (tabIndex == 4) {
+                SimpleAdapter mouthAdapter = new SimpleAdapter(MoreFragment.this.getContext(),mouthlistItems,R.layout.cell_select,
+                        new String[] {"mouth"}, new int[] {R.id.cell_selectimageview1});
+                gridView.setAdapter(mouthAdapter);
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        ((ManActivity)getActivity()).changeImage("mouth",position);
+                        // ImageView changeimageview = (ImageView)findViewById(R.id.cell_selectimageview1);
+                        // changeimageview.setBackground(getResources().getDrawable(R.drawable.chang_shape));
+                        //gridView.setSelector(new ColorDrawable(Color.BLACK));
+                        //ImageView changeimageview = (ImageView)findViewById(R.id.cell_selectimageview1);
+                        // changeimageview.setBackground(getResources().getDrawable(R.drawable.chang_shape));
+                        //Toast toast = Toast.makeText(getApplicationContext(),"点击"+position,Toast.LENGTH_SHORT);
+                        //toast.show();
                     }
                 });
             }
         }
+        //woman
         if (mantype == false) {
             if (tabIndex == 0) {
                 SimpleAdapter hairAdapter = new SimpleAdapter(MoreFragment.this.getContext(),hairlistItems,R.layout.cell_select,

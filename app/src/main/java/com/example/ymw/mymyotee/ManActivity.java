@@ -52,7 +52,7 @@ public class ManActivity extends FragmentActivity {
 
     private IndicatorViewPager indicatorViewPager;
     private LayoutInflater inflate;
-    private int size = 3;
+    private int size = 5;
     private int countsaveimage = 0;
     private boolean manorwoman = true;
     private int index_pic;
@@ -60,6 +60,8 @@ public class ManActivity extends FragmentActivity {
             R.drawable.hair_selector,
             R.drawable.face_selector,
             R.drawable.eye_selector,
+            R.drawable.nose_selector,
+            R.drawable.mouth_selector
     };
     private int[] eyes = new int[] {
             R.drawable.eye_4, R.drawable.eye_5,R.drawable.eye_6,R.drawable.eye_7,R.drawable.eye_8,
@@ -247,7 +249,6 @@ public class ManActivity extends FragmentActivity {
         return manorwoman;
     }
     private CompoundButton.OnCheckedChangeListener onCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
-
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             if (buttonView == splitAutotoggleButton) {
@@ -262,7 +263,6 @@ public class ManActivity extends FragmentActivity {
         }
     };
     private class MyAdapter extends IndicatorViewPager.IndicatorFragmentPagerAdapter {
-
         public MyAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
         }
@@ -276,8 +276,10 @@ public class ManActivity extends FragmentActivity {
         public View getViewForTab(int position, View convertView, ViewGroup container) {
             if (convertView == null) {
                 convertView = inflate.inflate(R.layout.tab_top, container, false);
+               // convertView = inflate.inflate(R.layout.cell_select, container, false);
             }
             Button button = (Button) convertView;
+            //ImageView imageView = (ImageView)findViewById(R.id.cell_selectimageview1);
             button.setBackground(getResources().getDrawable(selectors[position]));
             int padding = dipToPix(10);
             return convertView;
@@ -298,6 +300,7 @@ public class ManActivity extends FragmentActivity {
             // 表示数据没变化不用更新.notifyDataChange的时候重新调用getViewForPage
             return PagerAdapter.POSITION_NONE;
         }
+
 
     };
     /**

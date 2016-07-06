@@ -14,6 +14,8 @@
     <script src="data/eyeData.js"></script>
     <script src="data/faceData.js"></script>
     <script src="data/hairData.js"></script>
+    <script src="data/noseData.js"></script>
+    <script src="data/mouthData.js"></script>
     <!--css_file-->
     <link href="css/reset.css" type="text/css" rel="stylesheet" />
     <link href="css/edit.css" type="text/css" rel="stylesheet" />
@@ -42,6 +44,16 @@
     var hairTag = {
         id: 48,
         color: "#000000",
+        x: 0,
+        y: 0
+    };
+    var noseTagB = {
+        id: 0,
+        x: 0,
+        y: 0
+    };
+     var mouthTagB = {
+        id: 12,
         x: 0,
         y: 0
     };
@@ -77,8 +89,10 @@
 
    function initHeadEdit() {
          hairChange(1);
-         faceChange(8);
-         eyeChange(3);
+         faceChange(1);
+         eyeChange(1);
+         noseChange(1);
+         mouthChange(2);
         resizeSVG();
         $(window).resize(function() {
             d3.select("#contentSVG").attr("width", $(window).get(0).innerWidth).attr("height", $(window).get(0).innerHeight)
@@ -107,7 +121,13 @@
 	if (str[0] == "face") {
 	    faceChange(str[1]);
 	}
-    }
+	if (str[0] == "nose") {
+	    noseChange(str[1]);
+	}
+	if (str[0] == "mouth") {
+	     mouthChange((parseInt(str[1])+1).toString());
+	}
+  }
 
     function resizeSVG() {
         d3.select("#contentSVG").attr("width", $(window).get(0).innerWidth).attr("height", $(window).get(0).innerHeight)

@@ -7,8 +7,6 @@ function expressDataParse(d, b, c, a) {
             return b });
         if ((c.cX != 0) || (c.cY != 0)) { d.attr("transform", "translate(" + c.cX + "," + c.cY + ")") } } }
 
-
-
 function hairDataParse(e, a, f, d, c, b) {
     if (b) { $("." + d).remove() }
     if ("frontPath" in c) { e.selectAll("." + d).data(c.frontPath).enter().append("g").attr("class", function(i) {

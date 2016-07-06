@@ -21,3 +21,15 @@ function hairChange(i) {
 function eyeChange(i) {
 	expressDataParse(eye,"eyePart",eyeData["eye"+i].frontSide,true);
 }
+//鼻子变换
+function noseChange(i){
+    if (i < 10) {
+        expressDataParse(nose,"nosePart",noseData["nose2000"+i].frontSide,true);
+    } else {
+        expressDataParse(nose,"nosePart",noseData["nose200"+i].frontSide,true);
+    }
+}
+//嘴部编辑
+function mouthChange(i){
+	expressDataParse(mouth,"mouthPart",mouthData["mouth"+i].frontSide,true);
+}
